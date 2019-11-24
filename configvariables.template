@@ -1,0 +1,55 @@
+# Configure the Region
+
+variable "region" {
+  type = string
+  default = "eu-west-1"
+}
+
+variable "availability_zone" {
+  type = string
+  default = "eu-west-1c"
+}
+
+variable "private_admin_key_file" {
+  type = string
+  default = "~/.ssh/terraform"
+}
+
+variable "public_admin_key" {
+  type = string
+  default = "ssh-rsa AAAA????= admin"
+}
+
+variable "public_domain_name" {
+  type = string
+  default = "example.com"
+}
+
+variable "domain_name" {
+  type = string
+  default = "example.local"
+}
+
+variable "domain_name_machine_httpd" {
+  type = string
+  default = "machine-httpd.example.com"
+}
+
+variable "domain_name_machine_nexus" {
+  type = string
+  default = "machine-nexus.example.com"
+}
+
+variable "domain_name_machine_jenkins" {
+  type = string
+  default = "machine-jenkins.example.com"
+}
+
+# The public IP from your company/office/trusted networks. Only this IP allow to connect the EC2 servers
+variable "office_cidr_blocks" {
+  type = list(string)
+  default = ["123.456.567.890/32", # Single Office IP
+             "172.16.1.0/24"]      # AWS Subnet Block
+  #default = ["0.0.0.0/0"]         # Public Internet have Access
+}
+
