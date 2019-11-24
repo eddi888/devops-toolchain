@@ -12,7 +12,7 @@ awscli --version   (Windows)
 ```
 
 ## AWS Admin User musst existing
-![AAU](https://raw.github.com/eddi888/ultrahouse3000/master/site/aws-admin-user.png)
+![AAU](https://raw.github.com/eddi888/devops-toolchain/master/site/aws-admin-user.png)
 
 ## AWS User musst configured
 ```sh
