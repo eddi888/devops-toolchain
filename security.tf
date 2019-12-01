@@ -17,19 +17,6 @@ resource "aws_security_group" "public_http_in" {
   }
 }
 
-resource "aws_security_group" "public_https_in" {
-  name        = "public_https_in"
-  description = "Allow HTTPS inbound traffic"
-  vpc_id      = aws_vpc.main.id
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
 resource "aws_security_group" "http_in" {
   name        = "http_in"
   description = "Allow HTTP inbound traffic"
@@ -40,6 +27,19 @@ resource "aws_security_group" "http_in" {
     to_port     = 80
     protocol    = "tcp"
     cidr_blocks = var.office_cidr_blocks
+  }
+}
+
+resource "aws_security_group" "public_https_in" {
+  name        = "public_https_in"
+  description = "Allow HTTPS inbound traffic"
+  vpc_id      = aws_vpc.main.id
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 

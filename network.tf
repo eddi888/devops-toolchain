@@ -81,4 +81,3 @@ resource "aws_eip" "httpd" {
 }
 
 
-

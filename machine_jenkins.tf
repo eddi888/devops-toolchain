@@ -16,25 +16,7 @@ resource "aws_instance" "jenkins" {
     Team      = "DevOps Toolchain"
     Volume    = aws_ebs_volume.ebs_jenkins.id
   }
-  
-  connection {
-    type        = "ssh"
-    user        = "ubuntu"
-	private_key = file(var.private_admin_key_file)
-	host        = self.public_ip
-  }
-  
-  provisioner "file" {
-    source      = "scripts/jenkins-provisioner.py"
-    destination = "/home/ubuntu/jenkins-provisioner.py"
-  }
-  
-  provisioner "remote-exec" {
-    inline = ["sudo apt-get update",
-	          "sudo apt-get upgrade -y",
-			  "sudo apt-get install -y python",
-			  "sudo python /home/ubuntu/jenkins-provisioner.py ${aws_ebs_volume.ebs_jenkins.id}"]
-  }
+
 }
 
 resource "aws_ebs_volume" "ebs_jenkins" {
@@ -51,4 +33,22 @@ resource "aws_volume_attachment" "ebs_at_jenkins" {
   device_name = "/dev/sdf"
   volume_id   = aws_ebs_volume.ebs_jenkins.id
   instance_id = aws_instance.jenkins.id
+  
+  connection {
+		type        = "ssh"
+		user        = "ubuntu"
+		private_key = file(var.private_admin_key_file)
+		host        = aws_instance.jenkins.public_ip
+  }
+	
+  provisioner "file" {
+    source      = "machine-jenkins/"
+    destination = "/home/ubuntu/"
+  }
+  
+  provisioner "remote-exec" {
+    inline = ["sudo chmod +x /home/ubuntu/jenkins-provisioner.sh",
+	          "sudo /home/ubuntu/jenkins-provisioner.sh ${aws_ebs_volume.ebs_jenkins.id} JENKINS_VOL /storage"]
+  }
+
 }

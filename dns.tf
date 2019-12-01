@@ -15,10 +15,10 @@ resource "aws_route53_zone" "public" {
 
 resource "aws_route53_record" "httpdpub" {
   zone_id = aws_route53_zone.public.zone_id
-  name    = var.domain_name_machine_httpd
+  name    = "machine-httpd.${var.public_domain_name}"
   type    = "A"
   ttl     = "300"
-  records = [aws_instance.httpd.public_ip]
+  records = [aws_eip.httpd.public_ip]
 }
 
 resource "aws_route53_record" "httpd" {
@@ -29,9 +29,17 @@ resource "aws_route53_record" "httpd" {
   records = [aws_instance.httpd.private_ip]
 }
 
+resource "aws_route53_record" "nexusHttpProxy" {
+  zone_id = aws_route53_zone.public.zone_id
+  name    = "nexus.${var.public_domain_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_eip.httpd.public_ip]
+}
+
 resource "aws_route53_record" "nexuspub" {
   zone_id = aws_route53_zone.public.zone_id
-  name    = var.domain_name_machine_nexus
+  name    = "machine-nexus.${var.public_domain_name}"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.nexus.public_ip]
@@ -45,9 +53,17 @@ resource "aws_route53_record" "nexus" {
   records = [aws_instance.nexus.private_ip]
 }
 
+resource "aws_route53_record" "jenkinsHttpProxy" {
+  zone_id = aws_route53_zone.public.zone_id
+  name    = "jenkins.${var.public_domain_name}"
+  type    = "A"
+  ttl     = "300"
+  records = [aws_eip.httpd.public_ip]
+}
+
 resource "aws_route53_record" "jenkinspub" {
   zone_id = aws_route53_zone.public.zone_id
-  name    = var.domain_name_machine_jenkins
+  name    = "machine-jenkins.${var.public_domain_name}"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.jenkins.public_ip]
@@ -60,4 +76,5 @@ resource "aws_route53_record" "jenkins" {
   ttl     = "300"
   records = [aws_instance.jenkins.private_ip]
 }
+
 

@@ -30,19 +30,9 @@ variable "domain_name" {
   default = "example.local"
 }
 
-variable "domain_name_machine_httpd" {
+variable "email" {
   type = string
-  default = "machine-httpd.example.com"
-}
-
-variable "domain_name_machine_nexus" {
-  type = string
-  default = "machine-nexus.example.com"
-}
-
-variable "domain_name_machine_jenkins" {
-  type = string
-  default = "machine-jenkins.example.com"
+  default = "admin@example.com"
 }
 
 # The public IP from your company/office/trusted networks. Only this IP allow to connect the EC2 servers

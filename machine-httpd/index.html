@@ -1,0 +1,190 @@
+<html class=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+
+<style type="text/css">
+:root .ad
+{ display: none !important; }
+
+
+html, body {
+  height: 100%;
+}
+
+/* BG */
+body {
+  background: -webkit-linear-gradient(right, #0000FF, #000000);
+  background: linear-gradient(to right, #3333FF, #000022);
+  -webkit-transform: scale(1.2, 1.2);
+          transform: scale(1.2, 1.2);
+}
+
+/* TEXT */
+body > center {
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  margin-left: -40px;
+  margin-top: -120px;
+  color: #9999FF;
+} 
+
+/* ROTAION LINEs */
+body > div {
+  border-radius: 50%;
+  border: 3px solid #6666ff;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: rotateX(80deg) rotateY(20deg);
+          transform: rotateX(80deg) rotateY(20deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+}
+/* CORE */
+body > div:first-of-type:after {
+  content: "";
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background: #6666ff;
+  border-radius: 50%;
+  -webkit-transform: rotateX(-80deg) rotateY(0);
+          transform: rotateX(-80deg) rotateY(0);
+  box-shadow: 0 0 25px #ffffff;
+  -webkit-animation: nucleus_ 2s infinite linear;
+          animation: nucleus_ 2s infinite linear;
+  left: 50%;
+  top: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+}
+body > div:nth-of-type(2) {
+  -webkit-transform: rotateX(-80deg) rotateY(20deg);
+          transform: rotateX(-80deg) rotateY(20deg);
+}
+body > div:nth-of-type(2) > div,
+body > div:nth-of-type(2) > div:after {
+  -webkit-animation-delay: -.5s;
+          animation-delay: -.5s;
+}
+body > div:nth-of-type(3) {
+  -webkit-transform: rotateX(-70deg) rotateY(60deg);
+          transform: rotateX(-70deg) rotateY(60deg);
+}
+body > div:nth-of-type(3) > div,
+body > div:nth-of-type(3) > div:after {
+  -webkit-animation-delay: -1s;
+          animation-delay: -1s;
+}
+body > div:nth-of-type(4) {
+  -webkit-transform: rotateX(70deg) rotateY(60deg);
+          transform: rotateX(70deg) rotateY(60deg);
+}
+body > div:nth-of-type(4) > div,
+body > div:nth-of-type(4) > div:after {
+  -webkit-animation-delay: -1.5s;
+          animation-delay: -1.5s;
+}
+body > div > div {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-animation: trail_ 2s infinite linear;
+          animation: trail_ 2s infinite linear;
+}
+
+/* ELECTRONs */ 
+body > div > div:after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  box-shadow: 0 0 12px #ff0000;
+  left: 50%;
+  margin-left: -5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #ff6666;
+  -webkit-animation: particle_ 2s infinite linear;
+          animation: particle_ 2s infinite linear;
+}
+
+/* PULSE */
+@-webkit-keyframes trail_ {
+  from {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg);
+  }
+}
+
+@keyframes trail_ {
+  from {
+    -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+  }
+  to {
+    -webkit-transform: rotateZ(360deg);
+            transform: rotateZ(360deg);
+  }
+}
+@-webkit-keyframes particle_ {
+  from {
+    -webkit-transform: rotateX(90deg) rotateY(0deg);
+            transform: rotateX(90deg) rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateX(90deg) rotateY(-360deg);
+            transform: rotateX(90deg) rotateY(-360deg);
+  }
+}
+@keyframes particle_ {
+  from {
+    -webkit-transform: rotateX(90deg) rotateY(0deg);
+            transform: rotateX(90deg) rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateX(90deg) rotateY(-360deg);
+            transform: rotateX(90deg) rotateY(-360deg);
+  }
+}
+@-webkit-keyframes nucleus_ {
+  0%, 100% {
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 25px #00ff00;
+  }
+}
+@keyframes nucleus_ {
+  0%, 100% {
+    box-shadow: 0 0 0 transparent;
+  }
+  50% {
+    box-shadow: 0 0 25px #ffff00;
+  }
+}
+</style></head><body>
+<center>IT WORKS!</center>
+<div>
+  <div></div>
+</div>
+<div>
+  <div></div>
+</div>
+<div>
+  <div></div>
+</div>
+<div>
+  <div></div>
+</div>
+
+</body></html>

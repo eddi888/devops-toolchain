@@ -2,36 +2,46 @@
 resource "aws_instance" "httpd" {
   ami           = data.aws_ami.ubuntu.id
   availability_zone = var.availability_zone
-  instance_type = "t3.nano"
+  instance_type = "t3.micro"
   subnet_id     = aws_subnet.subnet1.id
   associate_public_ip_address = true
+  ebs_optimized = true
   key_name = "admin"
   vpc_security_group_ids = [aws_security_group.all_out.id,
                             aws_security_group.ssh_in.id,
-							aws_security_group.http_in.id,
-							aws_security_group.https_in.id,
+							aws_security_group.public_http_in.id,
+							aws_security_group.public_https_in.id,
                             aws_security_group.ping_in.id]
   tags = {
     Name      = "HTTPD"
     Team      = "DevOps Toolchain"
   }
   
+
+  
+}
+
+resource "null_resource" "httpd_provisioner_v2" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
 	private_key = file(var.private_admin_key_file)
-	host        = self.public_ip
+	host        = aws_eip.httpd.public_ip
   }
 
   provisioner "file" {
-    source      = "scripts/httpd-provisioner.py"
-    destination = "/home/ubuntu/httpd-provisioner.py"
+    source      = "machine-httpd/"
+    destination = "/home/ubuntu/"
   }
   
   provisioner "remote-exec" {
-    inline = ["sudo apt-get update",
-	          "sudo apt-get upgrade -y",
-			  "sudo apt-get install -y python3",
-			  "sudo python3 /home/ubuntu/httpd-provisioner.py"]
+    inline = ["sudo chmod +x /home/ubuntu/provisioner.sh",
+			  "sudo /home/ubuntu/provisioner.sh ${var.public_domain_name} ${var.email}"]
   }
+  
+  depends_on = [aws_instance.httpd,
+	            aws_route53_record.nexusHttpProxy,
+	            aws_route53_record.jenkinsHttpProxy,
+	            aws_eip.httpd]
 }
+
