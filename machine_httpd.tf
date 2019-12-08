@@ -13,7 +13,7 @@ resource "aws_instance" "httpd" {
 							aws_security_group.public_https_in.id,
                             aws_security_group.ping_in.id]
   tags = {
-    Name      = "HTTPD"
+    Name      = "HTTPD (${var.public_domain_name})"
     Team      = "DevOps Toolchain"
   }
   

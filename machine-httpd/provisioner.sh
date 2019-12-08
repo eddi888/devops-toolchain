@@ -64,7 +64,7 @@ if [ -d /etc/letsencrypt/live/nexus.$DOMAIN ];
     certbot certonly --standalone -n --email $EMAIL --agree-tos --preferred-challenges http -d nexus.$DOMAIN
   fi
 
-if [ -d /etc/letsencrypt/live/nexus.$DOMAIN ]; 
+if [ -d /etc/letsencrypt/live/jenkins.$DOMAIN ]; 
   then
     echo "ssl for jenkins.$DOMAIN already configured"
   else

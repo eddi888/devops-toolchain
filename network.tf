@@ -5,7 +5,7 @@ resource "aws_vpc" "main" {
   enable_dns_support = true
   enable_dns_hostnames = true
   tags = {
-    Name = "DevOps Toolchain"
+    Name = "DevOps Toolchain (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }
@@ -14,7 +14,7 @@ resource "aws_vpc_dhcp_options" "dn" {
   domain_name         = var.domain_name
   domain_name_servers = ["AmazonProvidedDNS"]
   tags = {
-    Name = "DevOps Toolchain"
+    Name = "DevOps Toolchain (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }
@@ -29,7 +29,7 @@ resource "aws_subnet" "subnet1" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "172.16.1.0/24"
   tags = {
-    Name = "DevOps Toolchain"
+    Name = "DevOps Toolchain (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }
@@ -38,7 +38,7 @@ resource "aws_subnet" "subnet2" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "172.16.2.0/24"
   tags = {
-    Name = "DevOps Toolchain"
+    Name = "DevOps Toolchain (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }
@@ -47,7 +47,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "DevOps Toolchain"
+    Name = "DevOps Toolchain (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }
@@ -61,7 +61,7 @@ resource "aws_route_table" "rt" {
   }
 
   tags = {
-    Name = "DevOps Toolchain"
+    Name = "DevOps Toolchain (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }
@@ -75,7 +75,7 @@ resource "aws_main_route_table_association" "rta" {
 resource "aws_eip" "httpd" {
   instance = aws_instance.httpd.id
   tags = {
-    Name = "Fixed DevOps IP"
+    Name = "Fixed DevOps IP (${var.public_domain_name})"
     Team = "DevOps Toolchain"
   }
 }

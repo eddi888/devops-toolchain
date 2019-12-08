@@ -4,6 +4,11 @@ resource "aws_key_pair" "admin" {
   public_key = var.public_admin_key
 }
 
+resource "aws_key_pair" "jenkins_slave" {
+  key_name   = "jenkins-slave"
+  public_key = var.public_jenkins_slave_key
+}
+
 resource "aws_security_group" "public_http_in" {
   name        = "public_http_in"
   description = "Allow HTTP inbound traffic"

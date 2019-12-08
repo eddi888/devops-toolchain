@@ -12,7 +12,7 @@ resource "aws_instance" "nexus" {
                             aws_security_group.ping_in.id]
   
   tags = {
-    Name      = "Nexus"
+    Name      = "Nexus (${var.public_domain_name})"
     Team      = "DevOps Toolchain"
     Volume    = aws_ebs_volume.ebs_nexus.id
   }
@@ -24,7 +24,7 @@ resource "aws_ebs_volume" "ebs_nexus" {
   size              = 5		//TODO lsblk AND resize2fs /dev/nvme?n?
   type              = "gp2"
   tags = {
-    Name      = "Dynamic Nexus Volume"
+    Name      = "Dynamic Nexus Volume (${var.public_domain_name})"
     Team      = "DevOps Toolchain"
   }
 }

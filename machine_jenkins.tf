@@ -12,7 +12,7 @@ resource "aws_instance" "jenkins" {
                             aws_security_group.ping_in.id]
   
   tags = {
-    Name      = "Jenkins-Master"
+    Name      = "Jenkins-Master (${var.public_domain_name})"
     Team      = "DevOps Toolchain"
     Volume    = aws_ebs_volume.ebs_jenkins.id
   }
@@ -24,7 +24,7 @@ resource "aws_ebs_volume" "ebs_jenkins" {
   size              = 1
   type              = "gp2"
   tags = {
-    Name      = "Dynamic Jenkins Volume"
+    Name      = "Dynamic Jenkins Volume (${var.public_domain_name})"
     Team      = "DevOps Toolchain"
   }
 }

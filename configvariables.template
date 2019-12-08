@@ -20,6 +20,16 @@ variable "public_admin_key" {
   default = "ssh-rsa AAAA????= admin"
 }
 
+variable "private_jenkins_slave_key_file" {
+  type = string
+  default = "~/.ssh/jenkinsslave"
+}
+
+variable "public_jenkins_slave_key" {
+  type = string
+  default = "ssh-rsa AAAA????= slave"
+}
+
 variable "public_domain_name" {
   type = string
   default = "example.com"
